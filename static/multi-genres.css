@@ -1,0 +1,32 @@
+/* V5 — multiple genres, compact in both channel themes */
+.genre-headline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:19px 0 9px}
+.genre-headline .field-label{margin:0}
+.genre-count{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;margin-left:4px;border-radius:6px;background:color-mix(in srgb,var(--acid) 17%,#111622);color:var(--acid);border:1px solid color-mix(in srgb,var(--acid) 35%,transparent);font-weight:850;font-size:10px}
+.genre-clear{border:0;background:transparent;color:#a5afbf;font-size:11px;font-weight:750;padding:5px 3px;transition:color .2s}
+.genre-clear:hover:not(:disabled){color:var(--acid)}
+.genre-clear:disabled{opacity:.4;cursor:default}
+.genre-multi-list{max-height:480px;gap:5px;padding:0 3px 2px 0;scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--acid) 35%,#2d3647) transparent}
+.genre-button{min-height:38px;transition:background-color .15s,border-color .15s,color .15s}
+.genre-button .genre-tick{margin-left:auto;display:grid;place-items:center;width:21px;height:21px;border-radius:6px;color:#8691a3;background:#ffffff09;border:1px solid #ffffff13;font-size:12px}
+.genre-button.is-selected .genre-tick{color:#0d1521;background:var(--acid);border-color:var(--acid)}
+.genre-matching{margin-top:16px;padding:13px 12px 11px;background:color-mix(in srgb,var(--acid) 3%,#111623);border:1px solid color-mix(in srgb,var(--acid) 17%,#2d3543);border-radius:12px}
+.genre-match-caption{color:#aebacd;font-size:10px;font-weight:900;letter-spacing:1.1px;margin-bottom:9px}
+.genre-mode{display:grid;grid-template-columns:1fr 1fr;gap:5px;background:#090d17;border:1px solid #30394a;border-radius:10px;padding:4px}
+.genre-mode button{border:1px solid transparent;color:#929eae;border-radius:7px;background:transparent;padding:9px 5px;font-size:10px;letter-spacing:.35px;font-weight:900;transition:background .15s,color .15s}
+.genre-mode button:hover{color:#f2f8ff}
+.genre-mode button.is-selected{background:color-mix(in srgb,var(--acid) 19%,#1b2534);color:var(--acid);border-color:color-mix(in srgb,var(--acid) 40%,transparent)}
+.genre-matching p,.genre-mini-tip{color:#94a0b3;font-size:10px;line-height:1.55;margin:10px 0 0}
+.wheel-genre-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;max-height:215px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--acid) 30%,#2d3647) transparent;padding:1px 2px 7px 0;margin-bottom:11px}
+.wheel-genre-chip{display:flex;align-items:center;gap:6px;min-width:0;min-height:34px;padding:7px 6px;border:1px solid #30394a;border-radius:8px;background:#111722;color:#b9c3d2;font-size:10px;font-weight:750;text-align:left;transition:background-color .16s,border-color .16s,color .16s}
+.wheel-genre-chip span:nth-child(2){min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wheel-genre-chip .chip-icon{flex:0 0 14px;text-align:center;color:#95a2b8;font-size:12px}
+.wheel-genre-chip .chip-check{margin-left:auto;color:#697487;font-size:12px}
+.wheel-genre-chip:hover{border-color:color-mix(in srgb,var(--acid) 52%,#2c3440);color:#fff}
+.wheel-genre-chip.is-selected{border-color:color-mix(in srgb,var(--acid) 60%,#2d3440);color:var(--acid);background:color-mix(in srgb,var(--acid) 12%,#111622)}
+.wheel-genre-chip.is-selected .chip-check,.wheel-genre-chip.is-selected .chip-icon{color:var(--acid)}
+.copy-genres{border:0;background:none;padding:9px 0 0;color:var(--acid);font-size:11px;font-weight:800;text-align:left;cursor:pointer}
+.copy-genres:hover{text-decoration:underline}
+.wheel-genre-list + .genre-mode{margin-top:2px}
+@media(max-width:900px) and (min-width:641px){.wheel-genre-list{max-height:190px}}
+@media(max-width:640px){.genre-multi-list{max-height:initial;overflow-x:auto;overflow-y:hidden;flex-wrap:nowrap;padding-bottom:9px}.genre-multi-list .genre-button{min-height:38px}.genre-button .genre-tick{display:none}.genre-matching{margin-top:12px}.wheel-genre-list{max-height:175px}.genre-headline{margin-top:17px}}
+@media(prefers-reduced-motion:reduce){.genre-button,.genre-mode button,.wheel-genre-chip{transition:none}}

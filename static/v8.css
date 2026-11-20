@@ -1,0 +1,33 @@
+/* GAMEPICK V8: progression, backlog and transfer controls. */
+.game-played-toggle{margin:9px 0 0;text-align:left;font-size:10px;letter-spacing:.45px;font-weight:850;color:#aeb8c6;border:1px solid #465265;background:#1a2432;padding:9px 10px;border-radius:9px;width:100%;transition:.15s}
+.game-played-toggle:hover{border-color:var(--acid);color:var(--acid)}
+.game-played-toggle.is-played{border-color:color-mix(in srgb,var(--acid) 35%,#344355);color:var(--acid);background:color-mix(in srgb,var(--acid) 7%,#18212c)}
+.winner-actions #winnerPlayed.is-played{border-color:var(--acid);color:var(--acid)}
+.favorites-view-tabs{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:22px 0 10px}
+.favorites-view-tabs button{border:1px solid #344051;background:#17202d;border-radius:999px;padding:10px 16px;font-size:11px;color:#b6c3d3;font-weight:800}
+.favorites-view-tabs button.is-selected{border-color:var(--acid);color:var(--acid);background:color-mix(in srgb,var(--acid) 9%,#171e2a)}
+.favorites-view-tabs>span{font-size:11px;color:#9faabc;margin-left:auto}
+.backup-panel{background:linear-gradient(115deg,color-mix(in srgb,var(--acid) 8%,#141927),#111724);border:1px solid color-mix(in srgb,var(--acid) 23%,#384052);border-radius:18px;padding:27px;max-width:1050px;margin:34px 0 12px}
+.backup-intro{display:flex;gap:19px;align-items:center}.backup-icon{width:67px;height:67px;border:1px solid color-mix(in srgb,var(--acid) 60%,#445);border-radius:15px;display:grid;place-items:center;font-size:34px;color:var(--acid);flex-shrink:0;background:#10151e}
+.backup-panel .eyebrow{margin:0 0 8px}.backup-panel h2{font-size:clamp(21px,2.8vw,31px);line-height:1.1;margin:0 0 10px;letter-spacing:-.6px}
+.backup-panel p{font-size:12px;color:#aeb8c9;line-height:1.7;margin:0}.backup-actions{display:flex;gap:11px;align-items:center;margin:22px 0 12px;flex-wrap:wrap}
+.backup-upload{cursor:pointer;position:relative}.backup-upload input{position:absolute;inset:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.backup-upload:focus-within{outline:2px solid var(--acid);outline-offset:2px}
+.backup-panel .backup-hint{color:#b8c7d4;font-size:11px}
+@media(max-width:640px){.backup-panel{padding:18px}.backup-icon{width:49px;height:49px;font-size:27px}.backup-intro{gap:10px;align-items:flex-start}.backup-actions{display:grid}.backup-actions>*{width:100%}.favorites-view-tabs>span{width:100%;margin-left:0}}
+/* Remove leftover lime-green accents from the old universal theme. */
+.card-picture,.cover-fallback{background:radial-gradient(ellipse at 52% 28%,color-mix(in srgb,var(--acid) 14%,#1b2635),#111726 78%)}
+.cover-fallback{color:var(--acid);text-shadow:0 0 36px color-mix(in srgb,var(--acid) 30%,transparent)}
+.game-card:hover{border-color:color-mix(in srgb,var(--acid) 60%,#344052)}
+.card-type{border-color:color-mix(in srgb,var(--acid) 27%,transparent)}
+.favorite-button[aria-pressed="true"]{color:var(--acid2);border-color:color-mix(in srgb,var(--acid2) 48%,transparent)}
+.genre-button.is-selected{background:color-mix(in srgb,var(--acid) 9%,#141d29);border-color:color-mix(in srgb,var(--acid) 35%,#303745)}
+.history-icon{background:color-mix(in srgb,var(--acid) 10%,#1a2433)}
+/* Keep all five navigation pages accessible on narrow phones. */
+@media(max-width:640px){
+  .site-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;overflow:visible}
+  .site-nav .nav-link{display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;gap:3px;min-width:0;min-height:60px;padding:7px 2px;font-size:9px;line-height:1.15;white-space:normal;text-align:center}
+  .site-nav .nav-link>span:first-child{font-size:19px}
+  .site-nav .nav-link>span:nth-child(2){overflow-wrap:anywhere}
+  .site-nav .fav-number{position:absolute;top:2px;right:2px;font-size:8px;padding:1px 4px}
+}

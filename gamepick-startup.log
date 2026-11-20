@@ -1,0 +1,28 @@
+Python: 3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]
+Executable: C:\Users\voind\Desktop\GAMEPICK_STUDIO\.venv\Scripts\python.exe
+Project: C:\Users\voind\Desktop\GAMEPICK_STUDIO
+URL: http://127.0.0.1:5000/
+
+INFO:     Started server process [20964]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:5000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:63761 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63762 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63762 - "GET /static/creator-layout.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63762 - "GET /static/v8.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63762 - "GET /static/v9.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63762 - "GET /static/app.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63763 - "GET /static/creators.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63764 - "GET /static/v8.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63763 - "GET /api/live-vote/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63764 - "GET /api/games?q=&genres=&genre_mode=any&kind=demo&sort=relevance&page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63787 - "GET /api/wheel?kind=demo&genres=rpg%2Cstrategy%2Cpuzzle&genre_mode=any&q= HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63792 - "GET /api/wheel?kind=demo&genres=rpg%2Cstrategy%2Cpuzzle&genre_mode=any&q= HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64456 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64456 - "GET /api/games?q=&genres=&genre_mode=any&kind=demo&sort=relevance&page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64456 - "GET /api/live-vote/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64457 - "GET /api/games?q=&genres=&genre_mode=any&kind=full&sort=relevance&page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64457 - "GET /api/games?q=&genres=&genre_mode=any&kind=demo&sort=relevance&page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64457 - "GET /api/games?q=&genres=&genre_mode=all&kind=demo&sort=relevance&page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64457 - "GET /api/games?q=&genres=&genre_mode=all&kind=full&sort=relevance&page=1 HTTP/1.1" 200 OK

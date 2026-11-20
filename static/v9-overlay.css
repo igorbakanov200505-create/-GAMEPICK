@@ -1,0 +1,15 @@
+/* Generic OBS themes, transparent canvas, no channel references. */
+:root{--overlay-accent:#71e6fa}
+.mark{padding:10px 22px;border:1px solid var(--overlay-accent);border-radius:12px;background:#101827d8;box-shadow:0 7px 40px #0008}
+.mark span,.stream-overline,.bottom,.rolling-label,.heading{color:var(--overlay-accent)}
+.mark small{font-size:10px;color:#fff9;font-weight:800;letter-spacing:2px;margin-left:9px}
+.card{border:2px solid var(--overlay-accent);background:linear-gradient(125deg,#111a2af5,#10101ded);box-shadow:0 25px 70px #0009,0 0 38px color-mix(in srgb,var(--overlay-accent) 30%,transparent)}
+.ring{border-color:var(--overlay-accent);background:repeating-conic-gradient(from 6deg,color-mix(in srgb,var(--overlay-accent) 23%,#11182a) 0deg 45deg,#131b2add 45deg 90deg)}
+.ring-symbol{color:var(--overlay-accent)}.idle{color:#fff;background:#101827c4;border-color:var(--overlay-accent)}
+.stream-overline{font-size:13px;letter-spacing:3px;font-weight:900;text-shadow:0 2px 13px #000}
+html[data-channel="noir"] .card,html[data-channel="retro"] .card{border-radius:4px}
+html[data-channel="retro"] .name,html[data-channel="retro"] .heading{font-family:Consolas,monospace}
+html[data-channel="gold"] .card{background:linear-gradient(115deg,#2e2118f5,#100d0aeF)}
+html[data-channel="forest"] .card{background:linear-gradient(115deg,#1b352bf5,#071611ef)}
+html[data-channel="cosmos"] .card{background:linear-gradient(115deg,#302045ee,#100d23ef)}
+@media(prefers-reduced-motion:reduce){.ring,.ring-symbol,.card{animation:none!important}}

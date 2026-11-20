@@ -1,0 +1,35 @@
+/* Creator-specific transparent OBS skins; both work without external assets. */
+:root{--overlay-accent:#79e9f6}
+html[data-channel="gameoverellis"] .mark {font-family:"Trebuchet MS",system-ui,sans-serif;font-size:24px;letter-spacing:-.5px;padding:8px 21px 11px 10px;border-radius:14px;background:linear-gradient(100deg,#112a4edb,#161b40c4);border:1px solid #88dcff5e;box-shadow:0 6px 35px #03091870}
+html[data-channel="gameoverellis"] #overlayGlyph {font-size:26px;color:#ffb694;margin-right:5px}
+html[data-channel="gameoverellis"] #overlayBrand{color:#b6f7ff}
+html[data-channel="gameoverellis"] .mark small{color:#ffd5a5;font-size:10px;letter-spacing:3px;margin-left:10px}
+html[data-channel="gameoverellis"] .card {border:2px solid var(--overlay-accent);border-radius:26px;background:radial-gradient(ellipse at 25% 10%,#4373a777,transparent 62%),linear-gradient(130deg,#162d56ef,#171735f4);box-shadow:0 25px 70px #0009,0 0 45px #5284ff45;}
+html[data-channel="gameoverellis"] .card::after{content:"✦";position:absolute;right:12px;top:-22px;font-size:95px;color:#ffb38f22;pointer-events:none}
+html[data-channel="gameoverellis"] .heading,html[data-channel="gameoverellis"] .bottom,html[data-channel="gameoverellis"] .rolling-label{color:var(--overlay-accent)}
+html[data-channel="gameoverellis"] .tag {border-color:#9ad7ffd9;color:#d0fcff;background:#4ea7ee19}
+html[data-channel="gameoverellis"] .ring {background:repeating-conic-gradient(from 10deg,#78cfff44 0deg 45deg,#181a44c9 45deg 90deg);border:10px dashed var(--overlay-accent);box-shadow:0 0 65px #4189ff70,inset 0 0 35px #0008}
+html[data-channel="gameoverellis"] .ring-symbol {color:#ffd4a5}
+html[data-channel="gameoverellis"] .idle {background:linear-gradient(120deg,#1b315fe8,#171936e0);border-color:#78d2ff;border-radius:22px;color:#d2f9ff}
+html[data-channel="gameoverellis"] .bottom {letter-spacing:3px}
+html[data-channel="gameoverellis"] .stream-overline{color:#ffbd99}
+html[data-channel="azraellone"] .mark {font-family:Consolas,monospace;padding:11px 25px;border-radius:0;background:linear-gradient(100deg,#290a12e8,#121012df);border-left:5px solid var(--overlay-accent);box-shadow:0 15px 42px #000a;font-size:22px;letter-spacing:2px}
+html[data-channel="azraellone"] #overlayGlyph{font-size:27px;color:var(--overlay-accent);margin-right:7px}
+html[data-channel="azraellone"] #overlayBrand{color:#fff0f1}
+html[data-channel="azraellone"] .mark small{color:var(--overlay-accent);letter-spacing:3px;font-size:10px;margin-left:10px}
+html[data-channel="azraellone"] .card {border:1px solid #8e3544;border-left:7px solid var(--overlay-accent);border-radius:4px;background:repeating-linear-gradient(0deg,#ffffff02 0 7px,#ff33450c 8px 9px),radial-gradient(circle at 70% 20%,#70132566,transparent 65%),linear-gradient(120deg,#261017f5,#0b0b0df8);box-shadow:0 24px 70px #000c,0 0 50px #ff2c3a2c;position:relative}
+html[data-channel="azraellone"] .card::before{content:"TARGET / SELECTED";position:absolute;right:24px;top:14px;font:800 10px Consolas,monospace;letter-spacing:2px;color:#fb4a62aa}
+html[data-channel="azraellone"] .cover {border-radius:1px;border-color:#91404c}
+html[data-channel="azraellone"] .heading {color:var(--overlay-accent);font-family:Consolas,monospace;letter-spacing:3px}
+html[data-channel="azraellone"] .name {font-family:Impact,"Arial Narrow",system-ui,sans-serif;font-weight:900;letter-spacing:.7px}
+html[data-channel="azraellone"] .tag {border:1px solid #ab3a49;border-radius:1px;background:#ff2d4618;color:#ffa3ab;font-family:Consolas,monospace;letter-spacing:1px}
+html[data-channel="azraellone"] .ring {border:12px dotted var(--overlay-accent);background:repeating-conic-gradient(#6f152662 0deg 33deg,#0d0d10d8 33deg 68deg);box-shadow:0 0 45px #df213b66,inset 0 0 50px #000e}
+html[data-channel="azraellone"] .ring-symbol{color:var(--overlay-accent)}
+html[data-channel="azraellone"] .ring.case{border-style:solid;border-radius:3px}
+html[data-channel="azraellone"] .ring.drum{border-radius:2px}
+html[data-channel="azraellone"] .idle {border:1px solid var(--overlay-accent);border-radius:0;border-left-width:5px;background:#230e16e8;color:#ffadb9;font-family:Consolas,monospace}
+html[data-channel="azraellone"] .bottom {color:var(--overlay-accent);font-family:Consolas,monospace;letter-spacing:3px}
+.stream-overline{font-weight:900;letter-spacing:3px;font-size:13px;text-shadow:0 0 10px #000;display:block;margin:0 auto;color:var(--overlay-accent)}
+html[data-channel="azraellone"] .stream-overline{font-family:Consolas,monospace}
+@media(max-width:650px){html[data-channel="gameoverellis"] .mark,html[data-channel="azraellone"] .mark{font-size:13px;top:3vh;left:4vw}.stream-overline{font-size:10px}.card{min-height:0}}
+@media(prefers-reduced-motion:reduce){.card,.ring{animation:none!important}}

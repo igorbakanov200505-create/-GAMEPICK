@@ -1,0 +1,16 @@
+/* Release years and channel episode year filters */
+.year-filter-block{padding:18px 0;border-top:1px solid rgba(255,255,255,.09);display:grid;gap:10px}
+.year-preset,.video-year-toolbar select{width:100%;min-width:0;max-width:100%;padding:11px 13px;border:1px solid rgba(255,255,255,.18);border-radius:10px;color:#f2f5fc;background:#161b29;font:inherit;font-size:12px;cursor:pointer}
+.year-custom{display:flex;gap:8px;align-items:end;flex-wrap:wrap}
+.year-custom label{flex:1 1 72px;color:#bbc3d4;font-size:11px;display:grid;gap:6px}
+.year-custom input{width:100%;min-width:0;padding:10px;border:1px solid rgba(255,255,255,.18);border-radius:9px;background:#101723;color:#fff;font:inherit}
+.year-help{margin:1px 0 0;color:#94a2b8;font-size:10px;line-height:1.55}
+.year-filter-block .field-label{margin:0}
+.video-year-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin:14px 0;padding:12px;border-radius:13px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.025)}
+.video-year-toolbar label{font-size:11px;font-weight:750;color:#d6deea}
+.video-year-toolbar select{flex:1 1 180px;width:auto;max-width:260px}
+.video-year-toolbar button{font-size:10px;padding:10px 13px}
+#channelYearStatus{flex:1 1 100%;font-size:11px;color:#aab7cc}
+@media(max-width:610px){.video-year-toolbar{align-items:stretch}.video-year-toolbar select{max-width:none}.video-year-toolbar label{flex:1 1 100%}}
+
+.year-custom[hidden],#channelFetchYear[hidden]{display:none!important}

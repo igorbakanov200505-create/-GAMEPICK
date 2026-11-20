@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GAMEPICK — оверлей для OBS</title><style>
+*{box-sizing:border-box}html,body{width:100%;height:100%;padding:0;margin:0;overflow:hidden;background:transparent!important;color:#f9fff0;font-family:Inter,ui-sans-serif,system-ui,Arial,sans-serif}.stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:4vw;transition:opacity .4s}.card{width:min(1050px,92vw);min-height:280px;display:flex;align-items:center;gap:36px;padding:26px 36px;border:2px solid #bdf36b;border-radius:26px;background:linear-gradient(130deg,#111923ef,#233525f2);box-shadow:0 20px 55px #050705b3,0 0 45px #c9fa6236;backdrop-filter:blur(14px);animation:enter .55s both}.cover{width:min(330px,30vw);height:190px;object-fit:cover;border:2px solid #ffffff44;border-radius:15px;background:#26372d;flex-shrink:0}.heading{color:#cbfb72;font-size:clamp(13px,2vw,19px);letter-spacing:3px;font-weight:950;margin:0 0 9px}.name{font-size:clamp(28px,4.5vw,61px);font-weight:1000;line-height:1.04;letter-spacing:-2px;max-width:580px;overflow-wrap:anywhere;margin:0 0 16px;text-shadow:0 5px 15px #0008}.tag{padding:7px 12px;border:1px solid #d3fc98a1;border-radius:20px;color:#d9fbb0;font-size:14px;font-weight:800;display:inline-block}.mark{position:absolute;top:7vh;left:6vw;color:#f2ffeb;font-weight:950;letter-spacing:1px;font-size:21px;text-shadow:0 3px 12px #000}.mark span{color:#c9fa62}.bottom{position:absolute;bottom:7vh;left:50%;transform:translateX(-50%);font-size:12px;font-weight:950;letter-spacing:4px;color:#c9fa62;text-shadow:0 3px 10px #000}.ring-wrap{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:22px}.ring{height:min(280px,35vw);width:min(280px,35vw);border-radius:50%;border:13px dashed #c9fa62;box-shadow:0 0 70px #b7ff4a55,inset 0 0 50px #0008;display:grid;place-items:center;animation:spin 1.4s linear infinite;position:relative;background:#14211bd9}.ring-symbol{font-size:92px;color:#c9fa62;text-shadow:0 0 40px #b6ff6260;animation:spin 1.4s linear infinite reverse}.rolling{font-size:clamp(24px,3.9vw,50px);font-weight:1000;color:#fff;letter-spacing:1px;text-shadow:0 5px 20px #000}.rolling-label{font-size:13px;font-weight:900;letter-spacing:4px;color:#c9fa62;text-shadow:0 4px 12px #000}.idle{font-size:25px;color:#dbefc4;text-shadow:0 2px 10px #000;font-weight:850;background:#101821ca;border:1px solid #647b50;border-radius:17px;padding:25px 45px}.stage[hidden]{display:none}.ring.case{border-style:solid;border-radius:12px;animation:case 1s ease-in-out infinite alternate}.ring.drum{border-radius:27px;animation:drum .85s linear infinite}.ring.casino{border:13px dotted #eccb76}.ring.casino .ring-symbol{color:#e7be74}.bad{color:#fff;background:#251b20;border:1px solid #ad6a6a;border-radius:12px;padding:18px}@keyframes spin{to{transform:rotate(360deg)}}@keyframes case{to{transform:translateX(25px)}}@keyframes drum{to{transform:rotateX(70deg)}}@keyframes enter{from{opacity:0;transform:translateY(36px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}@media(max-width:650px){.card{flex-direction:column;gap:18px;text-align:center;padding:20px}.cover{width:65vw;height:auto;aspect-ratio:16/9}.name{font-size:28px}.ring-symbol{font-size:60px}}@media(prefers-reduced-motion:reduce){.ring,.ring-symbol,.card{animation:none}}
+
+:root{--overlay-accent:#8be1ff}
+.card{border-color:var(--overlay-accent);box-shadow:0 20px 55px #050705b3,0 0 45px color-mix(in srgb,var(--overlay-accent) 20%,transparent)}
+.heading,.mark span,.bottom,.rolling-label{color:var(--overlay-accent)}
+.ring{border-color:var(--overlay-accent)}.ring-symbol{color:var(--overlay-accent)}
+</style><link rel="stylesheet" href="/static/v9-overlay.css"></head><body>
+<div class="mark"><span id="overlayGlyph">✦</span> <span id="overlayBrand">GAMEPICK</span> <small>LIVE</small></div>
+<div id="idle" class="stage"><div class="idle">✺ Рулетка готова к запуску</div></div>
+<div id="rolling" class="stage" hidden><div class="ring-wrap"><div class="stream-overline" id="rollingOverline">GAMEPICK / GAME NIGHT</div><div id="ring" class="ring"><span class="ring-symbol" id="symbol">✺</span></div><div class="rolling">ВЫБИРАЕМ ИГРУ...</div><div class="rolling-label" id="rollingLabel">РОЛЛИМ РУЛЕТКУ</div></div></div>
+<div id="winner" class="stage" hidden><div class="card"><img id="cover" class="cover" src="/static/favicon.svg" alt="Обложка выбранной игры"><div><p class="heading" id="winnerHeading">✦ ИГРА ВЫБРАНА</p><h1 id="gameName" class="name"></h1><span class="tag" id="kind">СЛУЧАЙНЫЙ ВЫБОР</span></div></div></div>
+<div class="bottom" id="overlayBottom">GAMEPICK // NEXT GAME</div>
+<script>
+(()=>{
+ const params=new URLSearchParams(location.search);const room=params.get('room')||'';
+ const themes={neon:['NEON PULSE','✦','#71e6fa'],noir:['DARK SIGNAL','⌖','#ff526d'],sunset:['SUNSET ARCADE','☀','#ffad75'],retro:['RETRO PIXEL','▦','#eacb5a'],frost:['ARCTIC FROST','❄','#89bdff'],forest:['EMERALD QUEST','✧','#80e8b4'],gold:['ROYAL GOLD','♛','#f6d47e'],cosmos:['COSMIC DRIFT','✺','#ba9bff']};
+ const chosenTheme=themes[params.get('theme')]?params.get('theme'):'neon';
+ const chosenAccent=params.get('accent')||'';
+ const preview=params.get('preview')==='1';
+ function applyChannel(theme,accent=''){
+   const profile=themes[theme]||themes.neon;
+   document.documentElement.dataset.channel=theme;
+   document.documentElement.style.setProperty('--overlay-accent',/^#[a-f0-9]{6}$/i.test(accent)?accent:profile[2]);
+   document.getElementById('overlayGlyph').textContent=profile[1];
+   document.getElementById('overlayBrand').textContent=profile[0];
+   document.getElementById('overlayBottom').textContent='GAMEPICK // NEXT GAME';
+   document.getElementById('winnerHeading').textContent=profile[1]+' ИГРА ВЫБРАНА';
+   document.getElementById('rollingOverline').textContent='GAMEPICK / '+profile[0];
+ }
+ applyChannel(chosenTheme,chosenAccent);
+ const $=id=>document.getElementById(id);const valid=/^[a-f0-9]{32}$/.test(room);
+ const machines={wheel:['◉','КОЛЕСО'],case:['▰','КЕЙС'],drum:['▤','БАРАБАН'],casino:['♠','КАЗИНО']};
+ let last='',inFlight=false;
+ function show(mode,data){for(const id of ['idle','rolling','winner'])$(id).hidden=id!==mode;
+  if(mode==='rolling'){$('ring').className='ring '+(data.machine||'wheel');$('symbol').textContent=machines[data.machine]?.[0]||'✺';$('rollingLabel').textContent=machines[data.machine]?.[1]||'РУЛЕТКА'}
+  if(mode==='winner'){const g=data.game||{};$('gameName').textContent=String(g.name||'Игра выбрана').slice(0,180);$('kind').textContent=g.kind==='demo'?'ДЕМОВЕРСИЯ':g.kind==='custom'?'ИЗ ТВОЕГО СПИСКА':'ПОЛНАЯ ИГРА';
+   const image=String(g.image||'');try{const u=new URL(image);if(u.protocol==='https:'&&(u.hostname.endsWith('.steamstatic.com')||u.hostname.endsWith('.akamaihd.net')))$('cover').src=image;else $('cover').src='/static/favicon.svg'}catch{$('cover').src='/static/favicon.svg'}
+   $('cover').onerror=()=>{$('cover').src='/static/favicon.svg';$('cover').onerror=null};
+  }
+ }
+ async function poll(){if(inFlight||!valid)return;inFlight=true;
+  try{const r=await fetch('/api/stream/'+room,{cache:'no-store'});if(!r.ok)throw Error('offline');const data=await r.json();const next=(data.updated||'')+':'+(data.status||'');
+   if(next!==last){last=next;applyChannel(data.theme||chosenTheme,data.accent||chosenAccent);if(data.status==='spinning')show('rolling',data);else if(data.status==='winner')show('winner',data);else show('idle',data)}
+  }catch{/* transient network errors do not hide the last winner */}finally{inFlight=false}
+ }
+ if(preview){$('winnerHeading').textContent='ПРЕДПРОСМОТР ОФОРМЛЕНИЯ';show('winner',{game:{name:'ТВОЯ СЛЕДУЮЩАЯ ИГРА',kind:'custom',image:''}})}
+ else if(valid){poll();setInterval(poll,650)}else{$('idle').firstElementChild.textContent='Некорректная ссылка оверлея'}
+})();
+</script></body></html>

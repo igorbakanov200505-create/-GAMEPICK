@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b12">
+  <meta name="description" content="GAMEPICK — красивые игровые рулетки, каталог демоверсий и полных игр, музыкальный кейс и режим для стримов.">
+  <title>GAMEPICK V10 — выбирай, во что играть</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="/static/creator-layout.css">
+  <link rel="stylesheet" href="/static/multi-genres.css">
+
+  <link rel="stylesheet" href="/static/year-filters.css">
+  <link rel="stylesheet" href="/static/v8.css">
+  <link rel="stylesheet" href="/static/v9.css">
+  <link rel="stylesheet" href="/static/v10.css">
+  <script src="/static/app.js" defer></script>
+  <script src="/static/creators.js" defer></script>
+  <script src="/static/v8.js" defer></script>
+  <script src="/static/v10.js" defer></script>
+</head>
+<body>
+  <div class="background-glow glow-a" aria-hidden="true"></div><div class="background-glow glow-b" aria-hidden="true"></div>
+  <div class="site">
+    <header class="topbar">
+      <button class="logo" id="navLogo" type="button" aria-label="GAMEPICK, открыть каталог">
+        <span class="logo-mark">G<span>✦</span></span><span class="logo-words">GAME<span>PICK</span><small>GAME DISCOVERY STUDIO</small></span>
+      </button>
+      <nav class="site-nav" aria-label="Основное меню">
+        <button type="button" class="nav-link is-active" data-page="catalog"><span aria-hidden="true">▦</span><span>Каталог</span></button>
+        <button type="button" class="nav-link" data-page="roulette"><span aria-hidden="true">✺</span><span>Рандомайзер</span></button>
+        <button type="button" class="nav-link" data-page="favorites"><span aria-hidden="true">♡</span><span>Избранное</span><span class="fav-number" id="favCount">0</span></button>
+        <button type="button" class="nav-link" data-page="creators"><span aria-hidden="true">◉</span><span>Для авторов</span></button>
+        <button type="button" class="nav-link" data-page="themes"><span aria-hidden="true">◐</span><span>Темы</span></button>
+      </nav>
+      <button class="top-stream" id="topStream" type="button"><span class="live-dot"></span> Для авторов <span aria-hidden="true">↗</span></button>
+    </header>
+
+    <main>
+      <section class="site-page" id="pageCatalog" aria-labelledby="catalogTitle">
+        <div class="hero" id="catalogHero">
+          <div class="hero-channel-photo" id="heroChannelPhoto" aria-hidden="true"></div>
+          <div class="hero-body">
+            <div class="eyebrow"><span class="eyebrow-dot"></span> <span id="channelEyebrow">GAMEPICK / GAME NIGHT</span> <span class="eyebrow-line"></span></div>
+            <h1 id="catalogTitle">НЕ ЗНАЕШЬ,<br><span>ВО ЧТО ИГРАТЬ?</span></h1>
+            <div class="creator-signature"><span class="signature-line"></span><span id="creatorSignature">GAMEPICK · ВЫБИРАЙ ИГРАЙ</span></div>
+            <p>Открой новую игру за пару кликов. Ищи по жанрам, сохраняй находки или доверь выбор красивой рулетке.</p>
+            <div class="hero-actions"><button class="button button-accent" id="heroSpin" type="button"><span>✺</span> ИСПЫТАТЬ УДАЧУ <span>↗</span></button><a href="#browse" class="button button-outline">СМОТРЕТЬ КАТАЛОГ ↓</a></div>
+
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="showcase-top"><span id="showcaseMode">GAMEPICK / PLAYROOM</span><span class="showcase-flare">✳</span></div>
+            <div class="hero-dial"><span class="dial-pointer"></span><span class="dial-star" id="heroGlyph">✦</span></div>
+            <div class="hero-art-title" id="heroArtTitle">НОВАЯ ИГРА. НОВАЯ ИСТОРИЯ.</div>
+            <div class="hero-art-sub" id="heroArtSub">GO ON · ТВОЯ РУЛЕТКА ТЕБЯ ЖДЁТ</div>
+          </div>
+        </div>
+        <section class="catalog-section" id="browse" aria-labelledby="browseTitle">
+          <div class="section-title"><div><div class="eyebrow">01 <span class="min-line"></span> ИССЛЕДУЙ</div><h2 id="browseTitle">КАТАЛОГ <span>ИГР</span></h2></div><div class="heading-caption">Ищи. Открывай. Сохраняй.<br>Твоя следующая любимая игра — где-то здесь.</div></div>
+          <div class="catalog-layout">
+            <aside class="catalog-sidebar" aria-label="Фильтры каталога">
+              <div class="sidebar-heading">ФИЛЬТРЫ <button id="catalogReset" type="button">Сбросить ↺</button></div>
+              <h3 class="field-label">ТИП ИГРЫ</h3>
+              <div class="toggle-group" id="catalogKinds" role="group" aria-label="Тип игры"><button data-kind="demo" class="is-selected" type="button" aria-pressed="true">Демоверсии</button><button data-kind="full" type="button" aria-pressed="false">Полные игры</button></div>
+              <div class="genre-headline"><h3 class="field-label">ЖАНРЫ <span class="genre-count" id="catalogGenreCount">0</span></h3><button type="button" id="catalogClearGenres" class="genre-clear">Очистить</button></div>
+              <div id="catalogGenres" class="genre-list genre-multi-list" role="group" aria-label="Выберите один или несколько жанров"></div>
+              <div class="genre-matching"><div class="genre-match-caption">КАК ИСКАТЬ</div><div class="genre-mode" id="catalogGenreMode" role="group" aria-label="Условия поиска по жанрам"><button type="button" data-mode="any" class="is-selected" aria-pressed="true">ЛЮБОЙ</button><button type="button" data-mode="all" aria-pressed="false">ВСЕ СРАЗУ</button></div><p id="catalogGenreHelp">Выбери до 8 жанров. Можно искать любой из них или сочетание всех.</p></div>
+              <div class="year-filter-block"><label class="field-label" for="catalogPeriod">ГОД ВЫХОДА ИГРЫ</label><select id="catalogPeriod" class="year-preset"><option value="all">Все годы</option><option value="new">Новые · 2024–сейчас</option><option value="2020s">2020–2029</option><option value="2010s">2010–2019</option><option value="2000s">2000–2009</option><option value="old">Старые · до 2000</option><option value="custom">Свой диапазон</option></select><div class="year-custom" id="catalogCustomYears" hidden><label>От <input id="catalogYearFrom" type="number" min="1980" max="2100" step="1" placeholder="2005"></label><label>До <input id="catalogYearTo" type="number" min="1980" max="2100" step="1" placeholder="2015"></label></div><p class="year-help">Фильтруются известные даты Steam. Для старых лет результаты могут быть неполными.</p></div>
+              <div class="sidebar-note"><span>✦</span><p>Не знаешь, что выбрать? Рандомайзер сделает это за тебя.</p></div>
+            </aside>
+            <div class="catalog-results">
+              <div class="search-toolbar">
+                <label class="search-input"><span aria-hidden="true">⌕</span><span class="sr-only">Поиск по названию</span><input id="catalogSearch" type="search" maxlength="90" placeholder="Название игры или ключевое слово" autocomplete="off"><kbd>/</kbd></label>
+                <label class="select-wrap"><span class="sr-only">Порядок сортировки</span><select id="catalogSort"><option value="relevance">По релевантности</option><option value="new">Новые</option><option value="popular">По отзывам</option><option value="name">По названию</option></select></label>
+              </div>
+              <div class="results-meta"><span id="catalogStatus">ПОДКЛЮЧАЕМ КАТАЛОГ...</span><span id="catalogGenreLabel">ВСЕ ЖАНРЫ</span></div>
+              <div id="catalogAlert" class="alert" role="alert" hidden></div>
+              <div id="catalogGrid" class="card-grid" aria-live="polite"></div>
+              <div class="load-row"><button type="button" class="button button-outline" id="catalogMore" hidden>ПОКАЗАТЬ ЕЩЁ ↓</button></div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="site-page roulette-page" id="pageRoulette" aria-labelledby="rouletteTitle" hidden>
+        <div class="roulette-intro"><div><div class="eyebrow"><span class="eyebrow-dot"></span> 02 <span class="min-line"></span> <span id="rouletteEyebrow">GAMEPICK / СЛУЧАЙ ВЫБИРАЕТ</span></div><h1 id="rouletteTitle">ВРАЩАЙ. <span>ВЫБИРАЙ.</span><br>ИГРАЙ.</h1><p>Выбирай игры, настраивай вращение и смотри, что выпадет.</p></div><div class="roulette-intro-stamp">LET'S<br><b>PLAY!</b><span>✳</span></div></div>
+        <div class="channel-stage-badge"><span id="channelBadgeGlyph">✦</span><span id="channelBadgeName">GAMEPICK</span><span class="badge-rule"></span><span id="channelBadgeTag">NIGHT PLAY / SELECT YOUR GAME</span></div>
+        <div class="roulette-layout" id="rouletteLayout">
+          <aside class="settings-panel" id="rouletteSettings" aria-label="Настройки случайного выбора">
+            <div class="panel-head"><div><small>КОНСОЛЬ ВЫБОРА</small><strong>НАСТРОЙ ИГРУ</strong></div><span class="panel-number">01 / 04</span></div>
+            <div class="setting-block"><div class="field-label">ВИД РАНДОМАЙЗЕРА</div><div id="machineChoices" class="machine-grid" role="group" aria-label="Вид рулетки">
+              <button type="button" class="machine-option is-selected" data-machine="wheel" aria-pressed="true"><span class="machine-icon">◉</span><strong>КОЛЕСО</strong><small>Классика</small></button>
+              <button type="button" class="machine-option" data-machine="case" aria-pressed="false"><span class="machine-icon">▰</span><strong>КЕЙС</strong><small>Как дроп</small></button>
+              <button type="button" class="machine-option" data-machine="drum" aria-pressed="false"><span class="machine-icon">▤</span><strong>БАРАБАН</strong><small>Теле-шоу</small></button>
+              <button type="button" class="machine-option" data-machine="casino" aria-pressed="false"><span class="machine-icon">♠</span><strong>КАЗИНО</strong><small>Рулетка</small></button>
+            </div></div>
+            <div class="setting-block"><div class="field-label">ОТКУДА ИГРЫ</div><div id="wheelSources" class="toggle-group source-options" role="group" aria-label="Источник списка"><button type="button" class="is-selected" data-source="catalog" aria-pressed="true">Каталог</button><button type="button" data-source="favorites" aria-pressed="false">Избранное</button><button type="button" data-source="own" aria-pressed="false">Мой список</button><button type="button" data-source="video" aria-pressed="false">Из выпусков</button></div></div>
+            <div id="remoteFilters">
+              <div class="setting-block"><div class="field-label">КАКИЕ ИГРЫ?</div><div class="kind-options" id="wheelKinds" role="group" aria-label="Тип игр для рандомайзера"><button type="button" class="is-selected" data-kind="demo" aria-pressed="true">◈ Демо</button><button type="button" data-kind="full" aria-pressed="false">▦ Полные</button><button type="button" data-kind="mix" aria-pressed="false">✦ Вместе</button></div></div>
+              <div class="setting-block"><div class="genre-headline"><span class="field-label">ЖАНРЫ <span class="genre-count" id="wheelGenreCount">0</span></span><button id="wheelClearGenres" class="genre-clear" type="button">Очистить</button></div><div id="wheelGenres" class="wheel-genre-list" role="group" aria-label="Жанры для рулетки"></div><div class="genre-mode" id="wheelGenreMode" role="group" aria-label="Условия подбора жанров"><button type="button" data-mode="any" class="is-selected" aria-pressed="true">ЛЮБОЙ</button><button type="button" data-mode="all" aria-pressed="false">ВСЕ СРАЗУ</button></div><button id="copyCatalogGenres" type="button" class="copy-genres">↳ Взять жанры из каталога</button><p class="genre-mini-tip">Можно выбрать до 8 жанров одновременно</p></div>
+              <div class="setting-block"><label class="field-label" for="wheelPeriod">ГОД ВЫХОДА ИГРЫ</label><select id="wheelPeriod" class="year-preset"><option value="all">Все годы</option><option value="new">Новые · 2024–сейчас</option><option value="2020s">2020–2029</option><option value="2010s">2010–2019</option><option value="2000s">2000–2009</option><option value="old">Старые · до 2000</option><option value="custom">Свой диапазон</option></select><div id="wheelCustomYears" class="year-custom" hidden><label>От <input id="wheelYearFrom" type="number" min="1980" max="2100" step="1" placeholder="2005"></label><label>До <input id="wheelYearTo" type="number" min="1980" max="2100" step="1" placeholder="2015"></label></div><p class="year-help">По датам выпуска, указанным в Steam.</p></div>
+              <div class="setting-block"><label class="field-label" for="wheelQuery">ПОИСК <span class="optional">НЕОБЯЗАТЕЛЬНО</span></label><input id="wheelQuery" class="field-input" type="search" maxlength="90" placeholder="Например, космос или зомби"></div>
+            </div>
+            <div id="favoriteFilters" hidden><div class="setting-block"><div class="field-label">ВЫБРАННЫЕ ИГРЫ</div><p id="favoritePoolInfo" class="mini-help">Избранное пока пустое.</p><button type="button" class="small-link-button" id="pickFavorites">Выбрать игры в избранном ↗</button></div></div>
+            <div id="videoFilters" hidden><div class="setting-block"><div class="field-label">ПОДБОРКА ИЗ ВИДЕО</div><p id="videoPoolInfo" class="mini-help">Добавь подборки во вкладке «Для авторов».</p><button type="button" id="pickVideos" class="small-link-button">Выбрать видео и игры ↗</button></div></div>
+            <div id="ownFilters" hidden><div class="setting-block"><label class="field-label" for="ownGames">ТВОЙ СПИСОК ИГР <span class="optional">ПО ОДНОЙ НА СТРОКУ</span></label><textarea id="ownGames" rows="6" spellcheck="false" placeholder="S.T.A.L.K.E.R. 2&#10;Minecraft&#10;Hollow Knight&#10;Portal 2"></textarea><p class="mini-help">Можно указать название или «Название | ссылка на Steam». Список сохраняется в браузере.</p></div></div>
+            <div class="setting-block"><div class="field-label">МУЗЫКА ВРАЩЕНИЯ</div><label class="select-wrap full"><span class="sr-only">Выбрать музыку</span><select id="soundTheme"><option value="auto">Автоматически по режиму</option><option value="baraban">Вращайте барабан! — оригинал</option><option value="spin">Звук рулетки</option><option value="gambling">Кейс / казино</option><option value="silent">Без звука</option></select></label><div class="sound-controls"><button id="previewSound" type="button" class="sound-preview" aria-label="Прослушать выбранную музыку">▶ Послушать</button><label class="volume"><span aria-hidden="true">♫</span><span class="sr-only">Громкость</span><input id="volume" type="range" min="0" max="100" value="70" aria-label="Громкость музыки"></label></div></div>
+            <label class="checkbox-row"><input id="excludePlayed" type="checkbox"><span><strong>Не выбирать пройденные</strong><small>Для поиска новой игры в эфире: исключить уже отмеченные прохождения</small></span></label>
+            <label class="checkbox-row"><input id="noRepeats" type="checkbox" checked><span><strong>Без повторений</strong><small>Не выбирать последние выпавшие игры, если возможно</small></span></label>
+
+            <section class="gp10-control setting-block" aria-label="Дополнительные режимы V10">
+              <div class="field-label">РЕЖИМЫ GAMEPICK <span class="gp10-spark">V10</span></div>
+              <label class="gp10-toggle"><input type="checkbox" id="gp10Triple"><span><b>Тройной рандомайзер</b><small>Игра + правило + испытание</small></span></label>
+              <label class="gp10-toggle"><input type="checkbox" id="gp10Mystery"><span><b>Секретная игра</b><small>Название скрыто до остановки</small></span></label>
+              <label class="gp10-toggle"><input type="checkbox" id="gp10Effects"><span><b>Секретные события</b><small>Редкие эффекты, выбор всегда честный</small></span></label>
+              <details class="gp10-rules" id="gp10RuleEditor"><summary>Настроить правила и испытания</summary>
+                <label for="gp10Rules">ПРАВИЛА (каждое с новой строки)</label><textarea id="gp10Rules" rows="5" maxlength="6000"></textarea>
+                <label for="gp10Challenges">ИСПЫТАНИЯ (каждое с новой строки)</label><textarea id="gp10Challenges" rows="5" maxlength="6000"></textarea>
+                <button id="gp10DefaultLists" class="subtle-button" type="button">↺ Восстановить примеры</button>
+              </details>
+            </section>
+            <button id="spinButton" type="button" class="button button-accent spin-button" disabled><span>✺</span> <span id="spinLabel">ПОДГОТОВКА ИГР...</span><span>↗</span></button>
+            <div class="settings-status" id="poolStatus" role="status">Загружаем список для вращения</div>
+          </aside>
+
+          <div class="playzone">
+            <section class="stage" aria-label="Анимация рандомайзера" id="stage">
+              <div class="stage-top"><span><i class="live-indicator"></i> <span id="stageBrand">ELLIS SELECT</span> / <b id="stageMachineLabel">WHEEL</b></span><span class="stage-status" id="stageStatus">STANDBY</span></div>
+              <div id="stageVisual" class="stage-visual"><div class="stage-empty"><div class="stage-empty-symbol">✺</div><h2>НАСТРОЙ И ВРАЩАЙ</h2><p>Твоя следующая игра уже где-то рядом</p></div></div>
+              <div class="stage-floor"><span id="stageHint">Выбери режим и нажми кнопку вращения</span><div class="signal-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+            </section>
+            <div id="rouletteAlert" class="alert" role="alert" hidden></div>
+            <section id="resultPanel" class="result-panel" aria-live="polite" hidden>
+              <div class="winner-banner"><span id="winnerBrand">ELLIS / GAME PICK</span> <span class="winner-divider">/</span> ✦ СЛУЧАЙ ВЫБРАЛ ДЛЯ ТЕБЯ</div>
+              <div class="winner-body"><div class="winner-cover"><img id="winnerImage" alt="Обложка выбранной игры" src="/static/favicon.svg"></div><div class="winner-info"><div class="winner-tag" id="winnerKind">ИГРА</div><h2 id="winnerName"></h2><div class="winner-actions"><a id="winnerLink" class="button button-accent" href="https://store.steampowered.com/" target="_blank" rel="noopener noreferrer">ОТКРЫТЬ ИГРУ ↗</a><button type="button" id="winnerFav" class="button button-outline">♡ СОХРАНИТЬ</button><button type="button" id="winnerPlayed" class="button button-outline">✓ ПРОЙДЕНО</button><button type="button" id="rollAgain" class="button button-outline">↻ ЕЩЁ РАЗ</button></div></div></div>
+            </section>
+
+            <section class="gp10-triple-result" id="gp10TripleResult" aria-live="polite" hidden>
+              <div class="gp10-triple-head"><span>✧ СЛУЧАЙНЫЙ СЦЕНАРИЙ</span><button id="gp10CopyResult" class="subtle-button" type="button">Копировать</button></div>
+              <div class="gp10-triple-grid"><div><small>ПРАВИЛО</small><strong id="gp10RuleValue">—</strong></div><div><small>ИСПЫТАНИЕ</small><strong id="gp10ChallengeValue">—</strong></div></div>
+              <p id="gp10EventLabel" hidden></p>
+            </section>
+            <div class="creator-bar"><div><small>РЕЖИМ СОЗДАТЕЛЯ КОНТЕНТА</small><strong>Для стримов и видео</strong><span>Убирает лишнее со сцены или показывает результат в OBS.</span></div><div class="creator-actions"><button type="button" id="videoMode" class="creator-btn">⛶ Режим записи</button><button type="button" id="overlayButton" class="creator-btn creator-primary">◉ OBS-оверлей</button></div></div>
+          </div>
+        </div>
+        <section class="history-section" aria-labelledby="historyTitle"><div class="section-title compact"><div><div class="eyebrow">03 <span class="min-line"></span> ПОСЛЕДНИЕ ВЫПАДЕНИЯ</div><h2 id="historyTitle">ИСТОРИЯ <span>ВЫБОРА</span></h2></div><button id="historyClear" class="subtle-button" type="button">Очистить историю ↺</button></div><div id="historyGrid" class="history-grid"></div></section>
+      </section>
+
+      <section class="site-page favorites-page" id="pageFavorites" aria-labelledby="favoritesTitle" hidden>
+        <div class="section-title"><div><div class="eyebrow">ТВОЯ КОЛЛЕКЦИЯ</div><h1 id="favoritesTitle">ЛЮБИМЫЕ <span>ИГРЫ</span></h1><p class="favorite-subtitle">Сохраняй игры и отмечай, какие из них должны участвовать в рулетке.</p></div></div>
+        <div class="favorites-tools">
+          <form id="manualFavoriteForm" class="manual-game-form"><label for="manualGameName" class="sr-only">Название игры для добавления</label><input id="manualGameName" required maxlength="180" placeholder="Добавить игру по названию"><button class="button button-accent" type="submit">+ ДОБАВИТЬ</button></form>
+          <label class="search-input favorites-search"><span aria-hidden="true">⌕</span><span class="sr-only">Найти сохранённую игру</span><input id="favoritesSearch" type="search" placeholder="Поиск в избранном..."></label>
+        </div>
+        <div class="favorites-view-tabs" role="group" aria-label="Какие игры показать"><button type="button" class="is-selected" data-played-filter="all" aria-pressed="true">Все игры</button><button type="button" data-played-filter="pending" aria-pressed="false">В планах</button><button type="button" data-played-filter="played" aria-pressed="false">Пройденные</button><span id="playedCount" role="status">Пройдено: 0</span></div>
+        <div class="favorites-selection"><span id="favoritesSelectedInfo" role="status">Выбрано для рулетки: 0</span><div><button id="favoritesSelectAll" type="button" class="subtle-button">Выбрать все</button><button id="favoritesSelectNone" type="button" class="subtle-button">Снять выбор</button><button id="favoritesStartSpin" type="button" class="button button-outline">КРУТИТЬ ИЗБРАННОЕ ↗</button></div></div>
+
+        <div class="gp10-library-tools"><label for="gp10LibStatus">СТАТУС <select id="gp10LibStatus"><option value="all">Любой</option><option value="planned">В планах</option><option value="playing">Играю</option><option value="paused">Отложено</option><option value="abandoned">Заброшено</option><option value="complete">Пройдено</option></select></label>
+        <label for="gp10LibRating">ОЦЕНКА <select id="gp10LibRating"><option value="0">Любая</option><option value="3">От 3 звёзд</option><option value="4">От 4 звёзд</option><option value="5">5 звёзд</option></select></label>
+        <label for="gp10LibSort">СОРТИРОВКА <select id="gp10LibSort"><option value="added">По добавлению</option><option value="rating">По оценке</option><option value="hours">По часам</option><option value="name">По названию</option></select></label></div>
+        <div id="favoritesGrid" class="card-grid"></div>
+      </section>
+      <section class="site-page creators-page" id="pageCreators" aria-labelledby="creatorsTitle" hidden>
+        <div class="creators-hero"><div class="eyebrow">◉ YOUTUBE LIVE / ИГРОВОЙ ЭФИР</div><h1 id="creatorsTitle">ДЛЯ СТРИМЕРОВ <span>И ВИДЕОБЛОГЕРОВ</span></h1><p>Голосование зрителей через настоящий чат YouTube, подборки игр из выпусков и красивый OBS-оверлей. Без донатов и платных голосов.</p></div>
+        <div class="creators-columns">
+          <section class="creator-box" aria-labelledby="voteTitle"><div class="eyebrow">01 / LIVE VOTE</div><h2 id="voteTitle">ГОЛОСОВАНИЕ <span>ЗРИТЕЛЕЙ</span></h2><p>Зритель пишет <b>!1</b>, <b>!2</b> или <b>!голос 3</b> в чат YouTube. Один активный голос на зрителя. Повторная команда изменяет выбор.</p>
+            <label for="liveVideo">Ссылка на прямой эфир YouTube</label><input id="liveVideo" type="url" placeholder="https://www.youtube.com/live/…">
+            <div id="liveHostCodeRow" hidden><label for="liveHostCode">Код ведущего</label><input id="liveHostCode" type="password" autocomplete="off" placeholder="Код из настроек сервера"></div>
+            <label for="liveNominees">Варианты игр (от 2 до 12, по одной в строке)</label><textarea id="liveNominees" rows="5" placeholder="Minecraft&#10;Metro Exodus&#10;Subnautica"></textarea>
+            <div class="creators-actions"><button class="button button-outline" id="liveFromPool" type="button">Из рулетки</button><button class="button button-outline" id="liveFromFavorite" type="button">♡ Избранное</button></div>
+            <p id="liveState" role="status" class="live-state">Не подключено. Для живого голосования нужен YOUTUBE_API_KEY на сервере.</p>
+            <div class="creators-actions"><button class="button button-accent" id="liveStart" type="button">▶ НАЧАТЬ ГОЛОСОВАНИЕ</button><button class="button button-outline" id="liveFinish" type="button" disabled>■ ЗАВЕРШИТЬ</button></div>
+            <div id="liveResults" class="live-results" aria-live="polite"></div><div class="creators-actions"><button class="button button-accent" id="liveSpinWinner" type="button" disabled>✺ КРУТИТЬ ПО ГОЛОСАМ</button><span id="liveVotesMeta">0 голосов</span></div>
+            <p class="small-note">Для чтения публичного чата используется официальный YouTube Data API; ключ не отправляется в браузер. <a href="https://developers.google.com/youtube/data/live/authentication" target="_blank" rel="noopener noreferrer">Документация YouTube ↗</a></p>
+          </section>
+          <section class="creator-box" aria-labelledby="episodesTitle"><div class="eyebrow">02 / LIBRARY</div><h2 id="episodesTitle">ПОДБОРКИ <span>ИЗ ВЫПУСКОВ</span></h2><p>Добавляй видео и игры, фильтруй выпуски по году и передавай выбранные игры в рандомайзер.</p>
+            <form id="creatorVideoForm"><label for="creatorVideoTitle">Название выпуска</label><input id="creatorVideoTitle" type="text" maxlength="120" required placeholder="Наши любимые хорроры"><label for="creatorVideoUrl">Ссылка на YouTube (необязательно)</label><input id="creatorVideoUrl" type="url" placeholder="https://youtu.be/…"><label for="creatorVideoDate">Дата выпуска</label><input id="creatorVideoDate" type="date" min="2005-01-01"><label for="creatorVideoGames">Список игр, каждая с новой строки</label><textarea id="creatorVideoGames" rows="4" required placeholder="Amnesia&#10;SOMA&#10;Outlast"></textarea><button class="button button-accent" type="submit">+ ДОБАВИТЬ ПОДБОРКУ</button></form>
+            <div class="creator-filters"><label for="creatorYear">Год<select id="creatorYear"><option value="all">Все годы</option><option value="new">Сначала новые</option><option value="old">Сначала старые</option></select></label><label for="creatorVideoSearch">Поиск<input id="creatorVideoSearch" type="search" placeholder="Игра или выпуск"></label></div><div class="creator-video-list" id="creatorVideos"></div><div class="creators-actions"><button class="button button-outline" id="creatorSpinVideos" type="button">✺ КРУТИТЬ ИЗ ВЫПУСКОВ</button><span id="creatorVideoCount">0 выбрано</span></div>
+          </section>
+        </div>
+          <section class="gp10-obs-panel creator-box" aria-label="Виджеты для OBS">
+            <div class="eyebrow">03 / OBS STUDIO</div><h2>ВИДЖЕТЫ <span>ДЛЯ ЭФИРА</span></h2><p>Отдельные прозрачные окна для OBS: анимация, результат, тройной сценарий, таймер, история игр и голосование зрителей.</p>
+            <div class="gp10-obs-grid" id="gp10OBSButtons">
+              <button type="button" data-widget="spin">✺ Анимация</button><button type="button" data-widget="result">★ Результат</button><button type="button" data-widget="triple">✧ Тройной выбор</button><button type="button" data-widget="timer">◷ Таймер</button><button type="button" data-widget="history">▤ История</button><button type="button" data-widget="vote">◉ Голосование</button>
+            </div>
+            <div class="gp10-widget-link"><label for="gp10OBSUrl">ССЫЛКА ДЛЯ OBS · ИСТОЧНИК «БРАУЗЕР»</label><input id="gp10OBSUrl" type="text" readonly><button id="gp10OBSCopy" type="button" class="button button-accent">Копировать</button><button id="gp10OBSPreview" type="button" class="button button-outline">Просмотр</button></div>
+            <p class="small-note">Размер источника 1280 × 720. Для локального сайта OBS должен работать на этом же компьютере. Ссылку с ID комнаты держи при себе.</p>
+          </section>
+<div class="creator-tips"><div><strong>OBS</strong><p>Открой «Рандомайзер → OBS-оверлей», скопируй адрес и добавь в OBS как браузерный источник.</p></div><div><strong>Клавиши</strong><p>Пробел — вращать, Esc — выйти из полноэкранного режима, / — искать.</p></div><div><strong>Пасхалки</strong><p>Небольшие секретные эффекты спрятаны в интерфейсе. Например, логотип любит частые нажатия.</p></div></div>
+      </section>
+      <section class="site-page themes-page" id="pageThemes" aria-labelledby="themesTitle" hidden>
+        <div class="eyebrow">◐ ОФОРМЛЕНИЕ</div><h1 id="themesTitle">ТВОЙ СТИЛЬ. <span>ТВОЁ ШОУ.</span></h1><p class="themes-lede">Восемь самостоятельных тем оформления. Они меняют фон, рулетку, интерфейс и OBS. Выбирай любую, без привязки к конкретному каналу.</p><div class="theme-grid" id="channelThemes" role="group" aria-label="Восемь визуальных тем"><button type="button" class="theme-card" data-channel="neon" aria-pressed="false"><span class="theme-picture v9-picture v9-neon"><span class="v9-glyph">✦</span><b>НЕОН</b><small>GAMEPICK / STREAM</small></span><span class="theme-details"><span class="theme-kicker">СТИЛЬ 01</span><strong>Neon Pulse</strong><small>Бирюзовый киберпанк</small><span class="theme-swatches"><i style="background:#71e6fa"></i><i style="background:#7967fd"></i><i style="background:#11131c"></i></span><span class="theme-select-caption">ВЫБРАТЬ ↗</span></span><span class="theme-check">✓</span></button><button type="button" class="theme-card" data-channel="noir" aria-pressed="false"><span class="theme-picture v9-picture v9-noir"><span class="v9-glyph">⌖</span><b>НОЧЬ</b><small>GAMEPICK / STREAM</small></span><span class="theme-details"><span class="theme-kicker">СТИЛЬ 02</span><strong>Dark Signal</strong><small>Красно-графитовая консоль</small><span class="theme-swatches"><i style="background:#ff526d"></i><i style="background:#682232"></i><i style="background:#11131c"></i></span><span class="theme-select-caption">ВЫБРАТЬ ↗</span></span><span class="theme-check">✓</span></button><button type="button" class="theme-card" data-channel="sunset" aria-pressed="false"><span class="theme-picture v9-picture v9-sunset"><span class="v9-glyph">☀</span><b>ЗАКАТ</b><small>GAMEPICK / STREAM</small></span><span class="theme-details"><span class="theme-kicker">СТИЛЬ 03</span><strong>Sunset Arcade</strong><small>Тёплое игровое шоу</small><span class="theme-swatches"><i style="background:#ffad75"></i><i style="background:#ff668c"></i><i style="background:#11131c"></i></span><span class="theme-select-caption">ВЫБРАТЬ ↗</span></span><span class="theme-check">✓</span></button><button type="button" class="theme-card" data-channel="retro" aria-pressed="false"><span class="theme-picture v9-picture v9-retro"><span class="v9-glyph">▦</span><b>РЕТРО</b><small>GAMEPICK / STREAM</small></span><span class="theme-details"><span class="theme-kicker">СТИЛЬ 04</span><strong>Retro Pixel</strong><small>8-битная аркада</small><span class="theme-swatches"><i style="background:#eacb5a"></i><i style="background:#8b6b3f"></i><i style="background:#11131c"></i></span><span class="theme-select-caption">ВЫБРАТЬ ↗</span></span><span class="theme-check">✓</span></button><button type="button" class="theme-card" data-channel="frost" aria-pressed="false"><span class="theme-picture v9-picture v9-frost"><span class="v9-glyph">❄</span><b>ЛЁД</b><small>GAMEPICK / STREAM</small></span><span class="theme-details"><span class="theme-kicker">СТИЛЬ 05</span><strong>Arctic Frost</strong><small>Холодное стекло</small><span class="theme-swatches"><i style="background:#89bdff"></i><i style="background:#437ac9"></i><i style="background:#11131c"></i></span><span class="theme-select-caption">ВЫБРАТЬ ↗</span></span><span class="theme-check">✓</span></button><button type="button" class="theme-card" data-channel="forest" aria-pressed="false"><span class="theme-picture v9-picture v9-forest"><span class="v9-glyph">✧</span><b>ЛЕС</b><small>GAMEPICK / STREAM</small></span><span class="theme-details"><span class="theme-kicker">СТИЛЬ 06</span><strong>Emerald Quest</strong><small>Изумрудное приключение</small><span class="theme-swatches"><i style="background:#80e8b4"></i><i style="background:#326c57"></i><i style="background:#11131c"></i></span><span class="theme-select-caption">ВЫБРАТЬ ↗</span></span><span class="theme-check">✓</span></button><button type="button" class="theme-card" data-channel="gold" aria-pressed="false"><span class="theme-picture v9-picture v9-gold"><span class="v9-glyph">♛</span><b>ЗОЛОТО</b><small>GAMEPICK / STREAM</small></span><span class="theme-details"><span class="theme-kicker">СТИЛЬ 07</span><strong>Royal Gold</strong><small>Королевский игровой вечер</small><span class="theme-swatches"><i style="background:#f6d47e"></i><i style="background:#7b5b29"></i><i style="background:#11131c"></i></span><span class="theme-select-caption">ВЫБРАТЬ ↗</span></span><span class="theme-check">✓</span></button><button type="button" class="theme-card" data-channel="cosmos" aria-pressed="false"><span class="theme-picture v9-picture v9-cosmos"><span class="v9-glyph">✺</span><b>КОСМОС</b><small>GAMEPICK / STREAM</small></span><span class="theme-details"><span class="theme-kicker">СТИЛЬ 08</span><strong>Cosmic Drift</strong><small>Космическое путешествие</small><span class="theme-swatches"><i style="background:#ba9bff"></i><i style="background:#7950ca"></i><i style="background:#11131c"></i></span><span class="theme-select-caption">ВЫБРАТЬ ↗</span></span><span class="theme-check">✓</span></button></div><section class="theme-demo-banner"><div class="theme-demo-meta"><span id="themeDemoGlyph">✦</span><div><span class="theme-demo-label">АКТИВНАЯ ТЕМА</span><h2 id="themeDemoName">NEON PULSE</h2><p id="themeDemoText">Неоновый эфир</p></div></div><div class="theme-demo-buttons"><button type="button" id="applyChannelShow" class="button button-accent">ПОДГОТОВИТЬ РУЛЕТКУ ↗</button><button type="button" id="previewChannelOverlay" class="button button-outline">ПРЕДПРОСМОТР OBS ↗</button></div></section><div class="theme-control-panel"><div><div class="field-label">СВОЙ АКЦЕНТ</div><p>Этот цвет запоминается для каждой темы отдельно.</p></div><div class="theme-color-actions"><label class="color-input-label" for="channelAccent">Цвет <input type="color" id="channelAccent" value="#71e6fa"></label><button id="resetChannelAccent" type="button" class="button button-outline">СБРОСИТЬ ЦВЕТ</button></div></div>
+
+        <section class="gp10-theme-editor" aria-label="Редактор оформления">
+          <div class="gp10-panel-heading"><span class="eyebrow">V10 / DESIGN LAB</span><h2>СОЗДАЙ <span>СВОЁ ОФОРМЛЕНИЕ</span></h2><p>Настройки индивидуальны для каждой из восьми тем и сохраняются в браузере.</p></div>
+          <div class="gp10-editor-grid">
+            <label>ФОН<select id="gp10Bg"><option value="default">Фон темы</option><option value="aurora">Сияние</option><option value="mesh">Цифровая сетка</option><option value="stars">Ночной космос</option><option value="custom">Моё изображение</option></select></label>
+            <label>ШРИФТ<select id="gp10Font"><option value="modern">Современный</option><option value="mono">Технический</option><option value="round">Мягкий</option></select></label>
+            <label>СКРУГЛЕНИЕ <output id="gp10RadiusValue">14 px</output><input type="range" id="gp10Radius" min="0" max="28" step="2" value="14"></label>
+            <label>ЭФФЕКТЫ<select id="gp10Motion"><option value="on">Анимации</option><option value="off">Минимум движений</option></select></label>
+            <label class="gp10-editor-file">СВОЙ ФОН (PNG / JPG / WebP)<input id="gp10BgFile" type="file" accept="image/png,image/jpeg,image/webp"><small>До 4 МБ, уменьшается перед сохранением</small></label>
+          </div>
+          <div class="gp10-editor-actions"><button type="button" class="button button-outline" id="gp10DesignReset">↺ Сбросить дизайн темы</button><span id="gp10EditorStatus" role="status">Изменения сразу видны на сайте</span></div>
+        </section>
+        <section class="backup-panel" aria-labelledby="backupTitle">
+          <div class="backup-intro"><span class="backup-icon" aria-hidden="true">▣</span><div><div class="eyebrow">МОЯ КОЛЛЕКЦИЯ</div><h2 id="backupTitle">СОХРАНИТЬ СВОЙ ПРОГРЕСС</h2><p>Резервная копия избранного, пройденных игр, истории, своих списков, настроек рулетки и подборок выпусков. Файл останется на твоём устройстве.</p></div></div>
+          <div class="backup-actions"><button type="button" class="button button-accent" id="backupExport">↓ СКАЧАТЬ КОПИЮ</button><label class="button button-outline backup-upload" for="backupImport">↑ ВОССТАНОВИТЬ ИЗ ФАЙЛА<input id="backupImport" type="file" accept=".json,application/json"></label></div>
+          <p class="backup-hint" id="backupStatus" role="status">Данные хранятся в этом браузере. Перед обновлением Windows или переносом сайта на другой компьютер скачай резервную копию.</p>
+        </section>
+        <p class="theme-disclaimer">GAMEPICK — независимый проект для любителей игр и создателей контента.</p>
+      </section>
+    </main>
+    <footer class="footer"><strong>GAME<span>PICK</span> <i>✺</i></strong><span>Выбирай игру. Создавай шоу.</span><span>© 2026 GAMEPICK · Независимый проект. Названия игр и бренды принадлежат правообладателям. Не связан с YouTube или Steam.</span></footer>
+  </div>
+
+  <dialog id="gp10LibraryDialog" class="gp10-dialog" aria-labelledby="gp10LibraryTitle">
+    <form id="gp10LibraryForm">
+      <div class="gp10-dialog-top"><div class="eyebrow">МОЯ БИБЛИОТЕКА</div><button type="button" id="gp10LibClose" aria-label="Закрыть">×</button></div>
+      <h2 id="gp10LibraryTitle">ИГРА</h2>
+      <div class="gp10-modal-grid"><label>СТАТУС<select id="gp10GameStatus"><option value="planned">В планах</option><option value="playing">Играю</option><option value="paused">Отложено</option><option value="abandoned">Заброшено</option><option value="complete">Пройдено</option></select></label>
+      <label>ОЦЕНКА<select id="gp10GameRating"><option value="0">Без оценки</option><option value="1">★ 1/5</option><option value="2">★★ 2/5</option><option value="3">★★★ 3/5</option><option value="4">★★★★ 4/5</option><option value="5">★★★★★ 5/5</option></select></label>
+      <label>ЧАСОВ В ИГРЕ<input id="gp10GameHours" type="number" min="0" max="9999" step="0.5" value="0"></label></div>
+      <label>МОИ ЗАМЕТКИ<textarea id="gp10GameNotes" rows="4" maxlength="1200" placeholder="Что запомнилось? Почему стоит вернуться?"></textarea></label>
+      <div class="gp10-dialog-actions"><button type="button" id="gp10LibCancel" class="button button-outline">Отмена</button><button type="submit" class="button button-accent">СОХРАНИТЬ</button></div>
+    </form>
+  </dialog>
+  <dialog id="overlayDialog" class="overlay-dialog" aria-labelledby="overlayTitle"><form method="dialog"><button class="dialog-x" aria-label="Закрыть окно" type="submit">×</button></form><div class="eyebrow">● РЕЖИМ СТРИМЕРА</div><h2 id="overlayTitle">РУЛЕТКА ПРЯМО В OBS</h2><p>Добавь ссылку ниже в OBS Studio как <b>«Источник браузера»</b>. Анимация и выпавшие игры будут появляться на стриме, когда ты вращаешь рулетку на сайте.</p><div class="overlay-guide"><div><span>01</span>Скопируй ссылку</div><div><span>02</span>OBS → Источники → Браузер</div><div><span>03</span>Размер: 1280 × 720</div></div><label for="overlayUrl" class="field-label">ТВОЯ ССЫЛКА ДЛЯ OBS</label><div class="copy-row"><input id="overlayUrl" readonly><button id="copyOverlay" type="button" class="button button-accent">КОПИРОВАТЬ</button></div><div class="dialog-actions"><a href="#" id="openOverlay" target="_blank" rel="noopener noreferrer">Посмотреть оверлей ↗</a><span>Звук воспроизводится на основном сайте</span></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
